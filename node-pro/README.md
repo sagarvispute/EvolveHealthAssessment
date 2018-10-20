@@ -1,10 +1,10 @@
-# Node project for Contact backend
+# Node for backend
 
 This project was generated with NPM Init and started with nodemon
 
 ## Adding database with the application
 
-Start Mongoa and create database `contact` and create collection `contacts` user this database
+Start Mongo and create database `contact` and create collection `contacts` under this database
 
 ## Development server
 
