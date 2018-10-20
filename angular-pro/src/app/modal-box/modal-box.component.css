@@ -1,0 +1,54 @@
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+}
+.modal .modal-wrapper {
+    background-color: #fff;
+    width: 700px;
+    margin: auto;
+    max-height: 90vh;
+    vertical-align: middle;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.modal .modal-header, .modal .modal-body, .modal .modal-footer { padding: 15px; }
+.modal .modal-header, .modal .modal-footer {
+    background-color: #ddd;
+}
+.modal .modal-header {
+    position: relative;
+    padding-right: 60px;
+    font-weight: 600;
+}
+.modal .modal-header .close-btn {
+    background-color: #999;
+    line-height: 0;
+    padding: 0 6px;
+    min-width: 35px;
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    margin: auto;
+    bottom: 0;
+    top: 0;
+    display: block;
+    max-height: 35px;
+    min-height: 30px;
+    font-size: 15px;
+}
+.modal .modal-body {}
+.modal .modal-footer {
+    text-align: center;
+}
+.modal .modal-footer > .btn {
+    margin-right: 5px;
+}
+.modal .modal-footer > .btn:last-child {
+    margin-right: 0;
+}

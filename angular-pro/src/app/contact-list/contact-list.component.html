@@ -1,0 +1,17 @@
+<div class="contact-list">
+  <div class="contact-block">
+    <div class="contact-selection"><input type="checkbox" class="custom-checkbox" [(ngModel)]="data['checked']" (ngModelChange)="checkedRecord()"></div>
+    <div class="contact-info">
+      <h3>{{data.firstName}} {{data.lastName}}</h3>
+      <ul class="list">
+        <li><strong>Email:</strong> {{data.email}}</li>
+        <li><strong>Phone No.:</strong> {{data.contact}}</li>
+      </ul>
+      <span class="contact-status" [ngClass]="{'active': data.status, 'inactive': !data.status}">{{data.status ? 'Active' : 'Inactive'}}</span>
+    </div>
+    <div class="contact-controls">
+      <button class="btn btn-primary" (click)="removeContact(data)" [disabled]="!data.status"><i class="fa fa-trash"></i></button>
+      <button (click)="editContact(data)" class="btn btn-default" [disabled]="!data.status"><i class="fa fa-edit"></i></button>
+    </div>
+  </div>
+</div>

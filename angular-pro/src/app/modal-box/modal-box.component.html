@@ -1,0 +1,16 @@
+<div class="modal" *ngIf="visibility">
+  <div class="modal-wrapper">
+    <div class="modal-header" *ngIf="modalData.header !== ''">
+      {{modalData.header}}
+      <button class="btn close-btn" (click)="close()"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div *ngIf="modalData.selector == 'edit-contact'">
+        <modal-contact-form [data]="modalData.content"></modal-contact-form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button *ngFor="let button of modalData.buttons" class="btn {{button.btnClass}}" (click)="button.action()">{{button.label}}</button>
+    </div>
+  </div>
+</div>

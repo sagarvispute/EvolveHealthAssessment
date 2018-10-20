@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1><i class="fa fa-address-card"></i> Contacts</h1>
+  <div class="contact-menu">
+    <button class="btn btn-default" (click)="settingDropdown = !settingDropdown"><i class="fa fa-cog"></i></button>
+    <ul *ngIf="settingDropdown">
+      <li *ngFor="let menu of settingMenu"><a href="javascript:;" [ngClass]="{'disabled':!menu.status}" (click)="menu.status ? menu.action() : ''">{{menu.label}}</a></li>
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<app-contact-list *ngFor="let contact of contactList" [data]="contact" (dataChange)="enableDisableMenu()" (edit)="editContact($event)" (deleteContact)="deleteContact($event)"></app-contact-list>
+<div *ngIf="contactList.length == 0" class="not-found-wrapper">
+  <h3>Contacts are not found!</h3>
+</div>
+<app-modal-box></app-modal-box>
+<app-message-box></app-message-box>
+<confirmation-box></confirmation-box>

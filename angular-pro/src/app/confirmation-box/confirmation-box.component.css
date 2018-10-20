@@ -1,0 +1,39 @@
+.confirmation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+}
+.confirmation .confirmation-wrapper {
+    background-color: #fff;
+    max-width: 500px;
+    margin: auto;
+    max-height: 90vh;
+    vertical-align: middle;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.confirmation .confirmation-header, .confirmation .confirmation-body, .confirmation .confirmation-footer { padding: 15px; }
+.confirmation .confirmation-header, .confirmation .confirmation-footer {
+    background-color: #ddd;
+}
+.confirmation .confirmation-header {
+    position: relative;
+    padding-right: 60px;
+}
+.confirmation .confirmation-body {
+    text-align: center;
+}
+.confirmation .confirmation-footer {
+    text-align: center;
+}
+.confirmation .confirmation-footer > .btn {
+    margin-right: 5px;
+}
+.confirmation .confirmation-footer > .btn:last-child {
+    margin-right: 0;
+}

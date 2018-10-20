@@ -1,0 +1,13 @@
+<div class="confirmation" *ngIf="visibility">
+  <div class="confirmation-wrapper">
+    <div class="confirmation-header">
+      Confirmation
+    </div>
+    <div class="confirmation-body">
+      {{confirmationData.description}}
+    </div>
+    <div class="confirmation-footer">
+      <button *ngFor="let button of confirmationData.buttons" class="btn {{button.btnClass}}" (click)="button.action()">{{button.label}}</button>
+    </div>
+  </div>
+</div>

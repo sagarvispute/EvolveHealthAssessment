@@ -1,0 +1,140 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+* {
+    box-sizing: border-box;
+}
+html, body {
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    margin: 0;
+}
+
+/* Buttons -- [START] */
+.btn {
+    border-color: #b2b2b2;
+    background-color: #f8f8f8;
+    color: #444;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0 12px;
+    min-width: 52px;
+    min-height: 35px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    vertical-align: top;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    line-height: 30px;
+    cursor: pointer;
+}
+.btn:disabled {
+    cursor: no-drop;
+}
+.btn.btn-primary {
+    border-color: #0c60ee;
+    background-color: #387ef5;
+    color: #fff;
+}
+.btn.btn-primary:disabled {
+    border-color: #0c60ee;
+    background-color: #abcaff;
+}
+.btn.btn-alert {
+    border-color: #e42112;
+    background-color: #ef473a;
+    color: #fff;
+}
+.btn.btn-warning {
+    border-color: #e6b500;
+    background-color: #ffc900;
+    color: #fff;
+}
+.btn.btn-royal {
+    border-color: #6b46e5;
+    background-color: #886aea;
+    color: #fff;
+}
+.btn.btn-success {
+    border-color: #28a54c;
+    background-color: #33cd5f;
+    color: #fff;
+}
+.btn.btn-default {
+    border-color: #b2b2b2;
+    background-color: #f8f8f8;
+    color: #444;
+}
+.btn.btn-default:disabled {
+    border-color: #777;
+    background-color: #e1e1e1;
+    color: #fff;
+}
+/* Buttons -- [END] */
+
+/* Checkbox -- [START] */
+.custom-checkbox {
+    position: relative;
+}
+.custom-checkbox::after {
+    display: block;
+    content: '';
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    background-color: #fff;
+    position: absolute;
+    z-index: 1;
+    top: -3px;
+    left: -3px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.custom-checkbox:checked::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 3px;
+    left: 1px;
+    width: 10px;
+    height: 4px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    transform: rotate(-45deg);
+}
+/* Checkbox -- [END] */
+
+/* List -- [START] */
+ul.list {
+    padding-left: 15px;
+    margin: 10px 0 0;
+}
+/* List -- [END] */
+
+/* Common -- [START] */
+.clear {
+    clear: both;
+}
+.form-control {
+    min-height: 30px;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #bebebe;
+}
+/* Common -- [END] */
+
+/* Table -- [START] */
+.table {
+    width: 100%;
+}
+.table tr > td {
+    padding: 5px;
+
+}
+/* Table -- [END] */

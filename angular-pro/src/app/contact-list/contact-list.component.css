@@ -1,0 +1,54 @@
+.contact-block {
+    display: flex;
+    background-color: #fff;
+    color: #444;
+    position: relative;
+    z-index: 2;
+    margin: -1px;
+    padding: 15px 0;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+.contact-block > div {
+    border-right: 1px solid #bfc2c4;
+    padding: 0 15px;
+}
+.contact-block > div:last-child {
+    border-right: none;
+}
+.contact-block .contact-selection {
+    width: 50px;
+    text-align: center;
+}
+.contact-block .contact-info {
+    width: 100%;
+    position: relative;
+}
+.contact-block .contact-info h3 {
+    margin: 0;
+    font-size: 30px;
+}
+.contact-block .contact-controls {
+    width: 100px;
+    text-align: center;
+}
+.contact-block .contact-controls .btn {
+    margin-bottom: 5px;
+}
+.contact-block .contact-status {
+    position: absolute;
+    border: 1px solid red;
+    padding: 3px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    right: 15px;
+    top: 0;
+}
+.contact-block .contact-status.active {
+    border-color: #16ba1d;
+    color: #16ba1d;
+}
+.contact-block .contact-status.inactive {
+    border-color: red;
+    color: red;
+}
