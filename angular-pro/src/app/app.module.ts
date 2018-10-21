@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { confirmationBoxComponent } from './confirmation-box/confirmation-box.component';
 import { appInterceptor } from './app-interceptor';
+import { OutsideClickDirective } from './directives/outside-click.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { appInterceptor } from './app-interceptor';
     MessageBoxComponent,
     ContactListComponent,
     ContactFormComponent,
-    confirmationBoxComponent
+    confirmationBoxComponent,
+    OutsideClickDirective
   ],
   imports: [
     FormsModule,

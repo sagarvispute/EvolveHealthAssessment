@@ -5,14 +5,19 @@
     margin: 0 0 20px;
     padding: 5px 0;
 }
-.contact-menu {
+.sort-menu, .contact-menu {
     position: absolute;
-    right: 0;
     top: 0;
     text-align: right;
     z-index: 100;
 }
-.contact-menu ul {
+.sort-menu {
+    right: 65px;
+}
+.contact-menu {
+    right: 0;
+}
+.sort-menu ul, .contact-menu ul {
     list-style: none;
     margin: 0;
     text-align: left;
@@ -21,7 +26,7 @@
     padding: 15px 0;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
-.contact-menu ul > li > a {
+.sort-menu ul > li > a, .contact-menu ul > li > a {
     text-decoration: none;
     color: #5a5a5a;
     display: block;
@@ -33,7 +38,7 @@
     cursor: not-allowed;
     color: #ccc;
 }
-.contact-menu ul > li > a:not(.disabled):hover {
+.sort-menu ul > li > a:not(.disabled):hover, .contact-menu ul > li > a:not(.disabled):hover {
     background-color: #f0f0f0;
 }
 .not-found-wrapper {

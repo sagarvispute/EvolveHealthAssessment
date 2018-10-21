@@ -1,11 +1,20 @@
 <div class="page-header">
   <h1><i class="fa fa-address-card"></i> Contacts</h1>
+  <div class="sort-menu">
+    <button class="btn btn-default" (click)="sortDropdown = !sortDropdown" (clickElsewhere)="disableDropdown('sort')"><i class="fa fa-sort"></i></button>
+    <ul *ngIf="sortDropdown">
+      <li><a href="javascript:;" (click)="sortContactList(true)">A to Z</a></li>
+      <li><a href="javascript:;" (click)="sortContactList(false)">Z to A</a></li>
+    </ul>
+  </div>
+
   <div class="contact-menu">
-    <button class="btn btn-default" (click)="settingDropdown = !settingDropdown"><i class="fa fa-cog"></i></button>
+    <button class="btn btn-default" (click)="settingDropdown = !settingDropdown" (clickElsewhere)="disableDropdown('menu')"><i class="fa fa-cog"></i></button>
     <ul *ngIf="settingDropdown">
       <li *ngFor="let menu of settingMenu"><a href="javascript:;" [ngClass]="{'disabled':!menu.status}" (click)="menu.status ? menu.action() : ''">{{menu.label}}</a></li>
     </ul>
   </div>
+  
   <div class="clear"></div>
 </div>
 

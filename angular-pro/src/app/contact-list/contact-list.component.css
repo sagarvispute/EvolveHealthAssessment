@@ -27,6 +27,8 @@
 .contact-block .contact-info h3 {
     margin: 0;
     font-size: 30px;
+    text-transform: capitalize;
+    line-height: 25px;
 }
 .contact-block .contact-controls {
     width: 100px;

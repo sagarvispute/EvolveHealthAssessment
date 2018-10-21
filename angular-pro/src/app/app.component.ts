@@ -21,6 +21,7 @@ interface contact {
 export class AppComponent implements OnInit {
   title = 'app';
   settingDropdown: boolean = false;
+  sortDropdown: boolean = false;
 
   settingMenu: any = [
     {
@@ -51,6 +52,7 @@ export class AppComponent implements OnInit {
         success => {
           if(success['success']) {
             this.contactList = success['data'];
+            this.sortContactList(true);
           }
         },
         failed => {}
@@ -76,6 +78,7 @@ export class AppComponent implements OnInit {
     this.contactList.forEach(element => {
       element['checked'] = false;
     });
+    this.enableDisableMenu();
   }
 
   addContact() {
@@ -84,11 +87,12 @@ export class AppComponent implements OnInit {
 
     let newData = {
       contact: null,
-      email: null,
-      firstName: null,
-      lastName: null,
-      status: true
+      email: '',
+      firstName: '',
+      lastName: ''
     };
+    newData['validate'] = Object.assign({}, newData);
+    newData['status'] = true;
 
     let contactData = {
       selector: 'edit-contact',
@@ -99,7 +103,12 @@ export class AppComponent implements OnInit {
           label: 'Save',
           btnClass: 'btn-primary',
           action: function() {
-            if(newData.contact && newData.contact !== null && newData.email !== '' && newData.email !== null && newData.firstName !== '' && newData.firstName !== null && newData.lastName !== '' &&newData.lastName !== null) {
+            newData['validate'].firstName = !me.validateInputValue(newData.firstName, 'require');
+            newData['validate'].lastName = !me.validateInputValue(newData.lastName, 'require');
+            newData['validate'].contact = !me.validateInputValue(newData.contact, 'contact');
+            newData['validate'].email = !me.validateInputValue(newData.email, 'email');
+
+            if(me.validateInputValue(newData.contact, 'contact') && me.validateInputValue(newData.email, 'email') && me.validateInputValue(newData.firstName, 'require') && me.validateInputValue(newData.lastName, 'require')) {
               me.appService.saveContact(newData).subscribe(
                 success => {
                   if(success['success']) {
@@ -116,9 +125,6 @@ export class AppComponent implements OnInit {
                   console.log(failed)
                 }
               );
-              
-            } else {
-              alert('All fields are mandatory!');
             }
           }
         },
@@ -156,7 +162,7 @@ export class AppComponent implements OnInit {
     if(removeIndex)
       removeIndex['status'] = _delete;
 
-    let deactiveIndex = this.settingMenu.find(x => x.label == 'Deactive Contact');
+    let deactiveIndex = this.settingMenu.find(x => x.label == 'Inactive Contact');
     if(deactiveIndex)
       deactiveIndex['status'] = _deactive;
 
@@ -168,6 +174,13 @@ export class AppComponent implements OnInit {
       deactiveIndex['status'] = false;
       activeIndex['status'] = false;
     }
+  }
+
+  disableDropdown(type) {
+    if(type == 'sort')
+      this.sortDropdown = false;
+    if(type == 'menu')
+      this.settingDropdown = false;
   }
 
   addContactInList(data) {
@@ -312,7 +325,12 @@ export class AppComponent implements OnInit {
   editContact(data) {
     const me = this;
     let cloneData = Object.assign({}, data);
-
+    cloneData.validate = {
+      firstName: false,
+      lastName: false,
+      contact: false,
+      email: false
+    };
     let contactData = {
       selector: 'edit-contact',
       header: 'Edit Contact',
@@ -322,7 +340,12 @@ export class AppComponent implements OnInit {
           label: 'Save',
           btnClass: 'btn-primary',
           action: function() {
-            if(cloneData.contact && cloneData.email !== '' && cloneData.firstName !== '' && cloneData.lastName !== '') {
+            cloneData.validate.firstName = !me.validateInputValue(cloneData.firstName, 'require');
+            cloneData.validate.lastName = !me.validateInputValue(cloneData.lastName, 'require');
+            cloneData.validate.contact = !me.validateInputValue(cloneData.contact, 'contact');
+            cloneData.validate.email = !me.validateInputValue(cloneData.email, 'email');
+
+            if(me.validateInputValue(cloneData.contact, 'contact') && me.validateInputValue(cloneData.email, 'email') && me.validateInputValue(cloneData.firstName, 'require') && me.validateInputValue(cloneData.lastName, 'require')) {
               me.appService.updateContact(cloneData).subscribe(
                 success => {
                   if(success['success']) {
@@ -341,7 +364,7 @@ export class AppComponent implements OnInit {
                 }
               );
             } else {
-              alert('All fields are mandatory!');
+              //alert('All fields are mandatory!');
             }
           }
         },
@@ -355,5 +378,43 @@ export class AppComponent implements OnInit {
       ]
     };
     this.modalService.show(contactData);
+  }
+
+  sortContactList(type) {
+    if(type) {
+      this.contactList.sort((a,b)=>a.firstName.localeCompare(b.firstName));
+    } else {
+      this.contactList.sort((a,b)=>b.firstName.localeCompare(a.firstName));
+    }
+    this.sortDropdown = false;
+  }
+
+  validateInputValue(_value, _type) {
+    if(_value !== null || _value !== '') {
+      if(_type == 'email') {
+        return this.validateEmail(_value);
+      } else if(_type == 'number' && _value !== null) {
+        return this.validateNumber(_value);
+      } else if(_type == 'contact' && _value !== null && _value.length >= 10) {
+        return this.validateContact(_value);
+      } else if(_type == 'require' && (_value !== '' || _value.length > 0)) {
+        return true; 
+      } else {
+        return false;
+      }
+    }
+  }
+
+  validateEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+  validateNumber(_num) {
+    let re = /^\d+$/;
+    return re.test(String(_num).toLowerCase());
+  }
+  validateContact(_num) {
+    let re = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
+    return re.test(String(_num).toLowerCase());
   }
 }

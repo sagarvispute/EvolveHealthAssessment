@@ -21,7 +21,7 @@ export class MessageBoxComponent implements OnInit {
 
           setTimeout(() => {
             this.messageService.hide();
-          }, 5000);
+          }, 3000);
         }
         this.toastData = this.messageService.toastData;
       }

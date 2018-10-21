@@ -9,6 +9,10 @@ html, body {
     padding: 10px;
     margin: 0;
 }
+.error-smg {
+    color: #d70000;
+    font-size: 12px;
+}
 
 /* Buttons -- [START] */
 .btn {
@@ -113,7 +117,7 @@ html, body {
 /* List -- [START] */
 ul.list {
     padding-left: 15px;
-    margin: 10px 0 0;
+    margin: 17px 0 0;
 }
 /* List -- [END] */
 

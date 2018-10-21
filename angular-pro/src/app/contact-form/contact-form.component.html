@@ -3,16 +3,28 @@
     <td>First Name</td>
     <td><input type="text" [(ngModel)]="data.firstName" class="form-control"></td>
   </tr>
+  <tr *ngIf="data.validate.firstName" class="error-smg">
+    <td colspan="2">Please enter first name</td>
+  </tr>
   <tr>
     <td>Last Name</td>
     <td><input type="text" [(ngModel)]="data.lastName" class="form-control"></td>
+  </tr>
+  <tr *ngIf="data.validate.lastName" class="error-smg">
+    <td colspan="2">Please enter last name</td>
   </tr>
   <tr>
     <td>Email</td>
     <td><input type="text" [(ngModel)]="data.email" class="form-control"></td>
   </tr>
+  <tr *ngIf="data.validate.email" class="error-smg">
+    <td colspan="2">Email is not entered or invalid</td>
+  </tr>
   <tr>
     <td>Phone</td>
     <td><input type="text" [(ngModel)]="data.contact" class="form-control"></td>
+  </tr>
+  <tr *ngIf="data.validate.contact" class="error-smg">
+    <td colspan="2">Contact is not entered or invalid</td>
   </tr>
 </table>
