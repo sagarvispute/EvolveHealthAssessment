@@ -14,26 +14,27 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+
 # How to use application
 
-## Create contact
+## Create Contact
 
-Click on `Setting` button which is placed on top and left of the screen and click on `Add Contact` link and enter your contact details on popup and then click on save button.
+Click on `Setting` button which is placed at the top and left of the screen and then click on `Add Contact` link and enter your Contact details on popup and then click on `Save` button.
 
-## Edit/ Modify contact
+## Edit/ Modify Contact
 
-Click on `Edit` button which is place in contact block at the left of screen and then change the details you required on popup and then click on `Save` button.
+Click on `Edit` button which is place in Contact block at the left of screen and then change the details you required on popup and then click on `Save` button.
 
-Note: `Edit/ Modify` is only allowed to action contact if your contact is active the it is applicable to modify.
+Note: `Edit/ Modify` is only applicable for `Active` Contacts.
 
-## Delete contact
+## Delete Contact
 
-User can delete the contact using 2 methods:
+User can delete the Contact using 2 methods:
 
-1. Click on `Bucket(Delete)` button which is right of screen in contact block and click on `Accept` button on confirmation box
+1. Click on `Bucket(Delete)` button which is right of screen in Contact block and then click on `Accept` button on Confirmation box
 
-2. Select your contacts and click on `Setting` button and click `Remove Contact` link and click on `Accept` button on confirmation box
+2. Select your Contacts and click on `Setting` button and click `Remove Contact` link and click on `Accept` button on Confirmation box
 
 ## Change status
 
-Select the contact you want to change their status and click to `Setting` button and then click on `Active Contact` or `Inactive Contact` button and click on `Accept` button on confirmation box
+Select the Contact you want to change their status and click to `Setting` button and then click on `Active Contact` or `Inactive Contact` button and click on `Accept` button on Confirmation box
