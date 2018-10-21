@@ -3,6 +3,7 @@ import { ModalServiceService } from './modal-box/modal-service.service';
 import { CofirmationServiceService } from './confirmation-box/confirmation-service.service';
 import { MessageServiceService } from './message-box/message-service.service';
 import { AppServiceService } from './app-service.service';
+import { appConstants } from './constants/app.constants';
 
 interface contact {
   contact: number,
@@ -101,7 +102,7 @@ export class AppComponent implements OnInit {
       buttons: [
         {
           label: 'Save',
-          btnClass: 'btn-primary',
+          btnClass: appConstants.classes.success,
           action: function() {
             newData['validate'].firstName = !me.validateInputValue(newData.firstName, 'require');
             newData['validate'].lastName = !me.validateInputValue(newData.lastName, 'require');
@@ -116,7 +117,7 @@ export class AppComponent implements OnInit {
                     me.modalService.hide();
 
                     let toastObj = {
-                      message: 'Contact added successfully!'
+                      message: appConstants.messages.addContact
                     };
                     me.messageService.show(toastObj);
                   }
@@ -130,7 +131,7 @@ export class AppComponent implements OnInit {
         },
         {
           label: 'Cancel',
-          btnClass: 'btn-alert',
+          btnClass: appConstants.classes.failed,
           action: function() {
             me.modalService.hide();
           }
@@ -149,12 +150,10 @@ export class AppComponent implements OnInit {
       if(element['checked']) {
         _delete = true;
          
-        if(element['status']) {
+        if(element['status'])
           _deactive = true;
-        }
-        if(!element['status']) {
+        if(!element['status'])
           _active = true;
-        }
       }
     });
 
@@ -190,11 +189,11 @@ export class AppComponent implements OnInit {
   changeStatus(stat) {
     const me = this;
     let confirmObj = {
-      description: 'Are you sure to delete this contact ?',
+      description: appConstants.descriptions.status,
       buttons: [
         {
           label: 'Accept',
-          btnClass: 'btn-primary',
+          btnClass: appConstants.classes.success,
           action: function() {
             let list = [];
             me.contactList.forEach(element => {
@@ -213,7 +212,7 @@ export class AppComponent implements OnInit {
                   });
       
                   let toastObj = {
-                    message: 'Slected contacts status have been changed!'
+                    message: appConstants.messages.updateContact
                   };
                   me.cofirmationService.hide();
                   me.messageService.show(toastObj);
@@ -227,7 +226,7 @@ export class AppComponent implements OnInit {
         },
         {
           label: 'Reject',
-          btnClass: 'btn-alert',
+          btnClass: appConstants.classes.failed,
           action: function() {
             me.cofirmationService.hide();
           }
@@ -241,11 +240,11 @@ export class AppComponent implements OnInit {
   deleteContact(data) {
     const me = this;
     let confirmObj = {
-      description: 'Are you sure to delete this contact ?',
+      description: appConstants.descriptions.delete,
       buttons: [
         {
           label: 'Accept',
-          btnClass: 'btn-primary',
+          btnClass: appConstants.classes.success,
           action: function() {
             me.appService.deleteContacts([data._id]).subscribe(
               success => {
@@ -254,7 +253,7 @@ export class AppComponent implements OnInit {
                   me.cofirmationService.hide();
 
                   let toastObj = {
-                    message: 'Contact delete successfully!'
+                    message: appConstants.messages.deleteContact
                   };
                   me.messageService.show(toastObj);
                   me.enableDisableMenu();
@@ -268,7 +267,7 @@ export class AppComponent implements OnInit {
         },
         {
           label: 'Reject',
-          btnClass: 'btn-alert',
+          btnClass: appConstants.classes.failed,
           action: function() {
             me.cofirmationService.hide();
           }
@@ -281,11 +280,11 @@ export class AppComponent implements OnInit {
   removeSelected() {
     const me = this;
     let confirmObj = {
-      description: 'Are you sure to delete this contact ?',
+      description: appConstants.descriptions.deleteMultiple,
       buttons: [
         {
           label: 'Accept',
-          btnClass: 'btn-primary',
+          btnClass: appConstants.classes.success,
           action: function() {
             let list = [];
             me.contactList.forEach(element => {
@@ -299,7 +298,7 @@ export class AppComponent implements OnInit {
                   me.contactList = me.contactList.filter(x => x.checked == false);
               
                   let toastObj = {
-                    message: 'Slected contacts have been deleted!'
+                    message: appConstants.messages.deleteMultiple
                   };
                   me.cofirmationService.hide();
                   me.messageService.show(toastObj);
@@ -311,7 +310,7 @@ export class AppComponent implements OnInit {
         },
         {
           label: 'Reject',
-          btnClass: 'btn-alert',
+          btnClass: appConstants.classes.failed,
           action: function() {
             me.cofirmationService.hide();
           }
@@ -325,12 +324,14 @@ export class AppComponent implements OnInit {
   editContact(data) {
     const me = this;
     let cloneData = Object.assign({}, data);
+
     cloneData.validate = {
       firstName: false,
       lastName: false,
       contact: false,
       email: false
     };
+
     let contactData = {
       selector: 'edit-contact',
       header: 'Edit Contact',
@@ -338,7 +339,7 @@ export class AppComponent implements OnInit {
       buttons: [
         {
           label: 'Save',
-          btnClass: 'btn-primary',
+          btnClass: appConstants.classes.success,
           action: function() {
             cloneData.validate.firstName = !me.validateInputValue(cloneData.firstName, 'require');
             cloneData.validate.lastName = !me.validateInputValue(cloneData.lastName, 'require');
@@ -350,7 +351,7 @@ export class AppComponent implements OnInit {
                 success => {
                   if(success['success']) {
                     let toastObj = {
-                      message: 'Contact has been updated!'
+                      message: appConstants.messages.updateContact
                     };
                     me.modalService.hide();
                     me.messageService.show(toastObj);
@@ -363,14 +364,12 @@ export class AppComponent implements OnInit {
                   console.log(failed)
                 }
               );
-            } else {
-              //alert('All fields are mandatory!');
             }
           }
         },
         {
           label: 'Cancel',
-          btnClass: 'btn-alert',
+          btnClass: appConstants.classes.failed,
           action: function() {
             me.modalService.hide();
           }
