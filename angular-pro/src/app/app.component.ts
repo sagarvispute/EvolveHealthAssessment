@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   title = 'app';
   settingDropdown: boolean = false;
   sortDropdown: boolean = false;
+  checkAll: boolean = false;
 
   settingMenu: any = [
     {
@@ -55,6 +56,7 @@ export class AppComponent implements OnInit {
             this.contactList = success['data'];
             this.sortContactList(true);
           }
+          this.checkMenuStatus();
         },
         failed => {}
       );
@@ -66,20 +68,26 @@ export class AppComponent implements OnInit {
     };
     this.settingMenu[1]['action'] = () => {
       this.removeSelected();
-      this.enableDisableMenu();
+      this.checkMenuStatus();
     };
     this.settingMenu[2]['action'] = () => {
       this.changeStatus(false);
-      this.enableDisableMenu();
+      this.checkMenuStatus();
     };
     this.settingMenu[3]['action'] = () => {
       this.changeStatus(true);
-      this.enableDisableMenu();
+      this.checkMenuStatus();
     };
     this.contactList.forEach(element => {
       element['checked'] = false;
     });
-    this.enableDisableMenu();
+  }
+
+  checkedAllContacts() {
+    this.contactList.forEach(element => {
+      element['checked'] = this.checkAll;
+    });
+    this.checkMenuStatus();
   }
 
   addContact() {
@@ -141,12 +149,16 @@ export class AppComponent implements OnInit {
     this.modalService.show(contactData);
   }
 
-  enableDisableMenu() {
+  checkMenuStatus() {
     let _delete: boolean = false;
     let _deactive: boolean = false;
     let _active: boolean = false;
+    let _checked: boolean = true;
 
     this.contactList.forEach(element => {
+      if(!element['checked']) {
+        _checked = false;
+      }
       if(element['checked']) {
         _delete = true;
          
@@ -173,6 +185,7 @@ export class AppComponent implements OnInit {
       deactiveIndex['status'] = false;
       activeIndex['status'] = false;
     }
+    this.checkAll = _checked;
   }
 
   disableDropdown(type) {
@@ -211,10 +224,11 @@ export class AppComponent implements OnInit {
                     }
                   });
                   
-                  me.messageService.show(appConstants.messages.updateContact, appConstants.messageClass.success);
+                  me.messageService.show(appConstants.messages.changeStatus, appConstants.messageClass.success);
                 } else {
                   me.messageService.show(success['message'], appConstants.messageClass.failed);
                 }
+                me.checkMenuStatus();
                 me.cofirmationService.hide();
               },
               failed => {
@@ -254,7 +268,7 @@ export class AppComponent implements OnInit {
                 } else {
                   me.messageService.show(success['message'], appConstants.messageClass.failed);
                 }
-                me.enableDisableMenu();
+                me.checkMenuStatus();
                 me.cofirmationService.hide();
               },
               failed => {
@@ -299,7 +313,7 @@ export class AppComponent implements OnInit {
                 } else {
                   me.messageService.show(success['message'], appConstants.messageClass.failed);
                 }
-                me.enableDisableMenu();
+                me.checkMenuStatus();
                 me.cofirmationService.hide();
               },
               failed => {
