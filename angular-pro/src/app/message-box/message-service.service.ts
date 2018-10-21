@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class MessageServiceService {
-  toastData: any = {};
+  toastSmg: string = '';
+  styleClass: string = '';
   toastObservable = new Subject<string>();
   toastObservable$ = this.toastObservable.asObservable();
 
@@ -15,8 +16,9 @@ export class MessageServiceService {
     this.toastObservable.next('hide');
   }
 
-  show(data) {
-    this.toastData = data;
+  show(data, _class) {
+    this.styleClass = _class;
+    this.toastSmg = data;
     this.toastObservable.next('show');
   }
 }

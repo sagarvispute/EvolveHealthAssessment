@@ -9,6 +9,18 @@
     border-radius: 3px;
     padding: 15px 50px 15px 15px;
 }
+.toast-wrapper.alert-success {
+    border: 1px solid #338f3f;
+    background-color: #c9ffbc;
+}
+.toast-wrapper.alert-failed {
+    border: 1px solid #c20000;
+    background-color: #ff9797;
+}
+.toast-wrapper.alert-warning {
+    border: 1px solid #d77f00;
+    background-color: #ffdba7;
+}
 .close-btn {
     border: none;
     background-color: #000000;

@@ -1,4 +1,4 @@
-<div class="toast-wrapper" *ngIf="visibility">
-  {{toastData.message}}
+<div class="toast-wrapper {{_class}}" *ngIf="visibility">
+  {{toastSmg}}
   <button class="close-btn" (click)="close()"><i class="fa fa-times"></i></button>
 </div>

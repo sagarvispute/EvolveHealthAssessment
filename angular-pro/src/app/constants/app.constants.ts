@@ -16,7 +16,13 @@ export const appConstants = {
         updateContact: 'Contact successfully updated!',
         deleteContact: 'Contact successfully deleted!',
         deleteMultiple: 'Selected contact successfully deleted!',
-        changeStatus: 'Selected contact successfully changed!'
+        changeStatus: 'Selected contact successfully changed!',
+        failed: 'Something went wrong!'
+    },
+    messageClass: {
+        success: 'alert-success',
+        failed: 'alert-failed',
+        warning: 'alert-warning'
     },
     classes: {
         success: 'btn-primary',

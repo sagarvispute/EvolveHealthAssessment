@@ -114,16 +114,16 @@ export class AppComponent implements OnInit {
                 success => {
                   if(success['success']) {
                     me.addContactInList(success['data']);
-                    me.modalService.hide();
-
-                    let toastObj = {
-                      message: appConstants.messages.addContact
-                    };
-                    me.messageService.show(toastObj);
+                    
+                    me.messageService.show(appConstants.messages.addContact, appConstants.messageClass.success);
+                  } else {
+                    me.messageService.show(success['message'], appConstants.messageClass.failed);
                   }
+                  me.modalService.hide();
                 },
                 failed => {
-                  console.log(failed)
+                  me.modalService.hide();
+                  me.messageService.show(appConstants.messages.failed, appConstants.messageClass.failed);
                 }
               );
             }
@@ -210,16 +210,16 @@ export class AppComponent implements OnInit {
                       element.checked = false;
                     }
                   });
-      
-                  let toastObj = {
-                    message: appConstants.messages.updateContact
-                  };
-                  me.cofirmationService.hide();
-                  me.messageService.show(toastObj);
+                  
+                  me.messageService.show(appConstants.messages.updateContact, appConstants.messageClass.success);
+                } else {
+                  me.messageService.show(success['message'], appConstants.messageClass.failed);
                 }
+                me.cofirmationService.hide();
               },
               failed => {
-                console.log(failed)
+                me.cofirmationService.hide();
+                me.messageService.show(appConstants.messages.failed, appConstants.messageClass.failed);
               }
             );
           }
@@ -250,17 +250,16 @@ export class AppComponent implements OnInit {
               success => {
                 if(success['success']) {
                   me.contactList = me.contactList.filter(x => x._id !== data._id);
-                  me.cofirmationService.hide();
-
-                  let toastObj = {
-                    message: appConstants.messages.deleteContact
-                  };
-                  me.messageService.show(toastObj);
-                  me.enableDisableMenu();
+                  me.messageService.show(appConstants.messages.deleteContact, appConstants.messageClass.success);
+                } else {
+                  me.messageService.show(success['message'], appConstants.messageClass.failed);
                 }
+                me.enableDisableMenu();
+                me.cofirmationService.hide();
               },
               failed => {
-                console.log(failed)
+                me.cofirmationService.hide();
+                me.messageService.show(appConstants.messages.failed, appConstants.messageClass.failed);
               }
             );
           }
@@ -296,15 +295,17 @@ export class AppComponent implements OnInit {
               success => {
                 if(success['success']) {
                   me.contactList = me.contactList.filter(x => x.checked == false);
-              
-                  let toastObj = {
-                    message: appConstants.messages.deleteMultiple
-                  };
-                  me.cofirmationService.hide();
-                  me.messageService.show(toastObj);
+                  me.messageService.show(appConstants.messages.deleteMultiple, appConstants.messageClass.success);
+                } else {
+                  me.messageService.show(success['message'], appConstants.messageClass.failed);
                 }
+                me.enableDisableMenu();
+                me.cofirmationService.hide();
               },
-              failed => {}
+              failed => {
+                me.cofirmationService.hide();
+                me.messageService.show(appConstants.messages.failed, appConstants.messageClass.failed);
+              }
             );
           }
         },
@@ -350,18 +351,18 @@ export class AppComponent implements OnInit {
               me.appService.updateContact(cloneData).subscribe(
                 success => {
                   if(success['success']) {
-                    let toastObj = {
-                      message: appConstants.messages.updateContact
-                    };
-                    me.modalService.hide();
-                    me.messageService.show(toastObj);
-
+                    me.messageService.show(appConstants.messages.updateContact, appConstants.messageClass.success);
+                    
                     let contactInd = me.contactList.findIndex(x => x._id == cloneData._id);
                     me.contactList[contactInd] = cloneData;
+                  } else {
+                    me.messageService.show(success['message'], appConstants.messageClass.failed);
                   }
+                  me.modalService.hide();
                 },
                 failed => {
-                  console.log(failed)
+                  me.modalService.hide();
+                  me.messageService.show(appConstants.messages.failed, appConstants.messageClass.failed);
                 }
               );
             }
@@ -380,27 +381,22 @@ export class AppComponent implements OnInit {
   }
 
   sortContactList(type) {
-    if(type) {
-      this.contactList.sort((a,b)=>a.firstName.localeCompare(b.firstName));
-    } else {
-      this.contactList.sort((a,b)=>b.firstName.localeCompare(a.firstName));
-    }
+    this.contactList.sort((a,b) => type ? a.firstName.localeCompare(b.firstName) : b.firstName.localeCompare(a.firstName));
     this.sortDropdown = false;
   }
 
   validateInputValue(_value, _type) {
     if(_value !== null || _value !== '') {
-      if(_type == 'email') {
+      if(_type == 'email')
         return this.validateEmail(_value);
-      } else if(_type == 'number' && _value !== null) {
+      else if(_type == 'number' && _value !== null)
         return this.validateNumber(_value);
-      } else if(_type == 'contact' && _value !== null && _value.length >= 10) {
+      else if(_type == 'contact' && _value !== null && _value.length >= 10)
         return this.validateContact(_value);
-      } else if(_type == 'require' && (_value !== '' || _value.length > 0)) {
+      else if(_type == 'require' && (_value !== '' || _value.length > 0))
         return true; 
-      } else {
+      else
         return false;
-      }
     }
   }
 

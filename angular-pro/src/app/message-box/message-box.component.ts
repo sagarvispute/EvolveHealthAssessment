@@ -8,12 +8,14 @@ import { MessageServiceService } from './message-service.service';
 })
 export class MessageBoxComponent implements OnInit {
   visibility: boolean = false;
-
-  toastData: any;
+  _class: string = '';
+  toastSmg: any ;
 
   constructor(private messageService: MessageServiceService) {
     this.messageService.toastObservable$.subscribe(
       data => {
+        this._class = this.messageService.styleClass;
+
         if(data == 'hide')
           this.visibility = false;
         if(data == 'show') {
@@ -23,7 +25,7 @@ export class MessageBoxComponent implements OnInit {
             this.messageService.hide();
           }, 3000);
         }
-        this.toastData = this.messageService.toastData;
+        this.toastSmg = this.messageService.toastSmg;
       }
     )
   }
