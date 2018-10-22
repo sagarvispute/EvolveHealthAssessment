@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { ModalBoxComponent } from './modal-box.component';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 describe('ModalBoxComponent', () => {
   let component: ModalBoxComponent;
@@ -8,7 +10,8 @@ describe('ModalBoxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalBoxComponent ]
+      declarations: [ ModalBoxComponent, ContactFormComponent ],
+      imports: [ FormsModule ]
     })
     .compileComponents();
   }));
